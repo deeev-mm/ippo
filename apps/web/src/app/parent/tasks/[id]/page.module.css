@@ -1,0 +1,29 @@
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 16px;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.comment {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+.commentMeta {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}

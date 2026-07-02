@@ -1,0 +1,72 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  margin: 14px 0 18px;
+  padding-bottom: 2px;
+}
+
+.tab {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tabActive {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: #fff;
+}
+
+.taskRow {
+  display: block;
+}
+
+.taskTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.taskTitle {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.taskMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+.taskActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  margin-top: 16px;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+}

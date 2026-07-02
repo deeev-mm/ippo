@@ -1,0 +1,38 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--coral-deep);
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+.childRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.childInfo {
+  flex: 1;
+}
+
+.childName {
+  font-weight: 700;
+}

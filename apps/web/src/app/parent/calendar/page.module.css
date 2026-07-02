@@ -1,0 +1,60 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  padding: 4px 0;
+}
+
+.day {
+  min-height: 74px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 4px;
+  font-size: 0.7rem;
+}
+
+.dayEmpty {
+  border: none;
+  background: transparent;
+}
+
+.dayNum {
+  font-weight: 700;
+  font-size: 0.75rem;
+  margin-bottom: 2px;
+}
+
+.dayToday .dayNum {
+  color: var(--coral-deep);
+}
+
+.taskChip {
+  display: block;
+  background: rgba(255, 107, 74, 0.14);
+  color: var(--coral-deep);
+  border-radius: 6px;
+  padding: 1px 4px;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.taskChipApproved {
+  background: rgba(47, 191, 143, 0.16);
+  color: var(--mint-deep);
+}

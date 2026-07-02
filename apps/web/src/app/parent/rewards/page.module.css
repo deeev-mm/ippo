@@ -1,0 +1,29 @@
+.section {
+  margin: 24px 0 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.requestRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.requestInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.requestActions {
+  display: flex;
+  gap: 8px;
+}
+
+.rewardRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
