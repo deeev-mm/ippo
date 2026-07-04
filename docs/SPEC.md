@@ -1,6 +1,6 @@
 # ippo 詳細仕様書
 
-最終更新: 2026-08-04 ／ 対象バージョン: フェーズ1（コア機能）完了時点
+最終更新: 2026-08-04 ／ 対象バージョン: フェーズ2（レポート・履歴機能）完了時点
 
 ---
 
@@ -102,8 +102,10 @@ Badge（バッジマスタ：アイコン・付与条件JSON）
 | GET | `/reward-balances` | parent | 全子どもの残高一覧 |
 | GET | `/badges` | 認証済 | バッジ一覧 |
 | POST/PUT/PATCH/DELETE | `/badges(/:id)` | parent | バッジCRUD |
-| GET | `/badge-assignments` | 認証済 | 自分の獲得バッジ一覧 |
+| GET | `/badge-assignments` | 認証済 | 自分の獲得バッジ一覧（parentが`?all=1`で全こどものgranted済み履歴） |
 | POST | `/badge-assignments/:id/receive` | 認証済（本人） | pending中のバッジを受け取り確定（status→granted） |
+| GET | `/reports/progress` | 認証済 | 日別のタスク完了数・獲得ポイント推移（`days`, `childId`クエリ対応） |
+| GET | `/reward-balance-histories` | 認証済 | ポイント増減履歴（`childId`クエリ対応、parent省略時は全員） |
 
 ## 6. 主要ビジネスロジック
 
@@ -145,20 +147,17 @@ Badge（バッジマスタ：アイコン・付与条件JSON）
 | `/child/calendar` | child | 実装済 |
 | `/child/rewards` | child | 実装済 |
 | `/child/badges` | child | 実装済 |
-| `/parent/report`, `/child/report` | 両方 | **未実装（フェーズ2）** |
-| `/parent/history/tasks`, `/rewards`, `/badges` | parent | **未実装（フェーズ2）** |
+| `/parent/report`, `/child/report` | 両方 | 実装済 |
+| `/parent/history/tasks`, `/rewards`, `/badges` | parent | 実装済 |
 
-## 8. フェーズ2（今後の予定）：レポート・履歴機能
+## 8. レポート・履歴機能
 
-フェーズ1では未着手のレポート・履歴画面を、フェーズ2として実装する。
+- `GET /reports/progress?days=&childId=`：日別のタスク完了数／獲得ポイント推移（child は自分のみ、parent は全員 or `childId`指定）。`/parent/report`, `/child/report` で recharts の複合グラフ（棒＝完了数、折れ線＝ポイント）として表示
+- `GET /reward-balance-histories?childId=`：ポイント増減履歴。`/parent/history/rewards` で一覧表示
+- `GET /badge-assignments?all=1`（parent専用）：全こどもの受け取り済み（granted）バッジを`receivedAt`降順で取得。`/parent/history/badges` で一覧表示
+- タスク履歴（`/parent/history/tasks`）は新規APIを追加せず、既存の `GET /tasks?status=approved|rejected` を再利用している
 
-必要な集計APIエンドポイント（データモデル自体は`task_submissions` / `reward_balance_histories` / `badge_assignments` に既に存在するため追加のスキーマ変更は不要）：
-
-- `GET /reports/progress`：子ども別・期間別のタスク完了数／ポイント推移
-- `GET /reward-balance-histories`：ポイント増減履歴
-- `GET /badge-assignments/history`：バッジ付与履歴（日時ソート）
-
-フロントはサンプルデータを廃止し、上記APIから取得した実データで再構築する。
+`/parent/master` の「履歴」タブから3つの履歴画面へ、各ダッシュボードの「レポートを見る」からレポート画面へ遷移できる。
 
 ## 9. デプロイ・CORS・環境変数
 

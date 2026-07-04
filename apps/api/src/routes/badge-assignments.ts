@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { and, eq } from "drizzle-orm";
-import { badgeAssignments, badges } from "../db/schema";
+import { and, desc, eq } from "drizzle-orm";
+import { badgeAssignments, badges, users } from "../db/schema";
 import type { AppVariables } from "../lib/auth";
 import { requireAuth } from "../lib/auth";
 import { nowIso, type Env } from "../lib/crypto";
@@ -14,6 +14,19 @@ badgeAssignmentRoutes.use("*", requireAuth);
 badgeAssignmentRoutes.get("/", async (c) => {
   const db = c.get("db");
   const user = c.get("user");
+
+  // parentが ?all=1 を付けると、全こどものgranted済みバッジ履歴を返す
+  if (user.role === "parent" && c.req.query("all") === "1") {
+    const rows = await db
+      .select({ assignment: badgeAssignments, badge: badges, userName: users.name })
+      .from(badgeAssignments)
+      .innerJoin(badges, eq(badges.id, badgeAssignments.badgeId))
+      .innerJoin(users, eq(users.id, badgeAssignments.userId))
+      .where(eq(badgeAssignments.status, "granted"))
+      .orderBy(desc(badgeAssignments.receivedAt));
+    return c.json(rows.map((r) => ({ ...r.assignment, badge: r.badge, userName: r.userName })));
+  }
+
   const rows = await db
     .select({ assignment: badgeAssignments, badge: badges })
     .from(badgeAssignments)

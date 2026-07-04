@@ -62,6 +62,11 @@ export default function ChildDashboardPage() {
             </div>
           </div>
 
+          <Link href="/child/report" className="btn btnSecondary btnBlock">
+            📊 レポートを見る
+          </Link>
+          <div className="spacer" />
+
           <h2 className="pageTitle" style={{ fontSize: "1.1rem" }}>
             今日のタスク
           </h2>

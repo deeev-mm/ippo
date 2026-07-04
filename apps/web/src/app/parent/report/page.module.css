@@ -1,0 +1,58 @@
+.tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  margin: 14px 0 18px;
+}
+
+.tab {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tabActive {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: #fff;
+}
+
+.chartCard {
+  padding: 10px 14px 4px;
+}
+
+.chartTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.summaryRow {
+  display: flex;
+  gap: 12px;
+  margin: 14px 0 20px;
+}
+
+.summaryCard {
+  flex: 1;
+  text-align: center;
+}
+
+.summaryValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--coral-deep);
+}
+
+.summaryLabel {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}

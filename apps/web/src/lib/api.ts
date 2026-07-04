@@ -2,6 +2,7 @@ import type {
   Badge,
   BadgeAssignment,
   Reward,
+  RewardBalanceHistory,
   RewardRequest,
   SessionUser,
   Task,
@@ -72,7 +73,16 @@ export type RewardRequestWithMeta = RewardRequest & {
   user: { id: string; name: string };
 };
 
-export type BadgeAssignmentWithBadge = BadgeAssignment & { badge: Badge };
+export type BadgeAssignmentWithBadge = BadgeAssignment & { badge: Badge; userName?: string };
+
+export type RewardBalanceHistoryWithName = RewardBalanceHistory & { userName: string };
+
+export type ProgressReport = {
+  days: string[];
+  children: { id: string; name: string; avatar: string | null }[];
+  completed: Record<string, number[]>;
+  points: Record<string, number[]>;
+};
 
 export const api = {
   // auth
@@ -163,6 +173,10 @@ export const api = {
       request<{ balances: { user_id: string; name: string; balance: number }[] }>(
         "/reward-balances",
       ),
+    histories: (params: Record<string, string> = {}) =>
+      request<{ histories: RewardBalanceHistoryWithName[] }>(
+        `/reward-balance-histories?${new URLSearchParams(params)}`,
+      ),
   },
 
   // badges
@@ -180,7 +194,15 @@ export const api = {
   // badge assignments
   badgeAssignments: {
     list: () => request<BadgeAssignmentWithBadge[]>("/badge-assignments"),
+    history: () =>
+      request<BadgeAssignmentWithBadge[]>("/badge-assignments?all=1"),
     receive: (id: string) =>
       request<BadgeAssignment>(`/badge-assignments/${id}/receive`, { method: "POST" }),
+  },
+
+  // reports
+  reports: {
+    progress: (params: Record<string, string> = {}) =>
+      request<ProgressReport>(`/reports/progress?${new URLSearchParams(params)}`),
   },
 };

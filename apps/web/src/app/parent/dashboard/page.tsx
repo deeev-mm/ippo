@@ -47,6 +47,11 @@ export default function ParentDashboardPage() {
             </Link>
           </div>
 
+          <Link href="/parent/report" className="btn btnSecondary btnBlock">
+            📊 レポートを見る
+          </Link>
+          <div className="spacer" />
+
           <h2 className="pageTitle" style={{ fontSize: "1.1rem" }}>
             こどものポイント
           </h2>

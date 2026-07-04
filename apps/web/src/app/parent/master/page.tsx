@@ -5,6 +5,7 @@ import { ChildrenSection } from "./ChildrenSection";
 import { CategoriesSection } from "./CategoriesSection";
 import { RewardsSection } from "./RewardsSection";
 import { BadgesSection } from "./BadgesSection";
+import { HistorySection } from "./HistorySection";
 import styles from "./master.module.css";
 
 const TABS = [
@@ -12,6 +13,7 @@ const TABS = [
   { value: "categories", label: "カテゴリ" },
   { value: "rewards", label: "ごほうび" },
   { value: "badges", label: "バッジ" },
+  { value: "history", label: "履歴" },
 ] as const;
 
 type Tab = (typeof TABS)[number]["value"];
@@ -38,6 +40,7 @@ export default function MasterPage() {
       {tab === "categories" && <CategoriesSection />}
       {tab === "rewards" && <RewardsSection />}
       {tab === "badges" && <BadgesSection />}
+      {tab === "history" && <HistorySection />}
     </>
   );
 }

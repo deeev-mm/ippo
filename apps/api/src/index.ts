@@ -14,6 +14,7 @@ import { rewardRequestRoutes } from "./routes/reward-requests";
 import { rewardBalanceRoutes } from "./routes/reward-balances";
 import { badgeRoutes } from "./routes/badges";
 import { badgeAssignmentRoutes } from "./routes/badge-assignments";
+import { reportRoutes } from "./routes/reports";
 
 const app = new Hono<{ Bindings: Env; Variables: AppVariables }>();
 
@@ -33,6 +34,7 @@ app.route("/reward-requests", rewardRequestRoutes);
 app.route("/", rewardBalanceRoutes);
 app.route("/badges", badgeRoutes);
 app.route("/badge-assignments", badgeAssignmentRoutes);
+app.route("/reports", reportRoutes);
 app.get("/calendar-tasks", requireAuth, calendarTasksHandler);
 
 export default app;

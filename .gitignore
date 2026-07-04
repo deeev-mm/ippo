@@ -12,3 +12,4 @@ dist
 .open-next
 apps/api/.dev.vars
 apps/web/.env.local
+*.tsbuildinfo

@@ -1,0 +1,31 @@
+.chartCard {
+  padding: 10px 14px 4px;
+}
+
+.chartTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.summaryRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.summaryCard {
+  flex: 1;
+  text-align: center;
+}
+
+.summaryValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--coral-deep);
+}
+
+.summaryLabel {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
