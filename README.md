@@ -59,7 +59,7 @@ pnpm install
 # D1 マイグレーション + デモアカウントのシード
 pnpm setup:local
 
-# API (http://localhost:8790) と Web (http://localhost:3010) を同時起動
+# API (http://localhost:8787) と Web (http://localhost:3000) を同時起動
 pnpm dev
 ```
 

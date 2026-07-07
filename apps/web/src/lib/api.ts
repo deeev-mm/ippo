@@ -12,7 +12,7 @@ import type {
 } from "@ippo/shared";
 
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:8790";
+  process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:8787";
 
 export class ApiError extends Error {
   status: number;

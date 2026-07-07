@@ -1,6 +1,6 @@
 # ippo 詳細仕様書
 
-最終更新: 2026-08-04 ／ 対象バージョン: フェーズ2（レポート・履歴機能）完了時点
+対象バージョン: フェーズ2（レポート・履歴機能）完了時点
 
 ---
 
@@ -76,7 +76,7 @@ Badge（バッジマスタ：アイコン・付与条件JSON）
 
 ## 5. APIエンドポイント一覧
 
-ベースURL: ローカルでは `http://localhost:8790`（`NEXT_PUBLIC_API_BASE_URL` で指定）。
+ベースURL: ローカルでは `http://localhost:8787`（`NEXT_PUBLIC_API_BASE_URL` で指定）。
 
 | メソッド | パス | 認可 | 概要 |
 |---|---|---|---|
@@ -193,7 +193,7 @@ UI（Pages）とAPI（Workers）を分けるとブラウザで**CORSエラー**�
 ```bash
 pnpm install
 pnpm setup:local   # D1マイグレーション + デモアカウントseed
-pnpm dev           # api:8790 / web:3010
+pnpm dev           # api:8787 / web:3000
 ```
 
 デモアカウント: `parent` / `taro` / `hanako`（パスワードは全て `demo1234`）。
