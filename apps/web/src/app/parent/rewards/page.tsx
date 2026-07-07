@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { Star } from "lucide-react";
 import type { Reward } from "@ippo/shared";
 import { api, type RewardRequestWithMeta } from "@/lib/api";
+import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
 export default function ParentRewardsPage() {
@@ -48,7 +50,9 @@ export default function ParentRewardsPage() {
       {balances.map((b) => (
         <div key={b.user_id} className={`card ${styles.rewardRow}`}>
           <span>{b.name}</span>
-          <span className="pointsChip">⭐ {b.balance}pt</span>
+          <span className="pointsChip">
+            <Star size={14} aria-hidden="true" /> {b.balance}pt
+          </span>
         </div>
       ))}
 
@@ -59,8 +63,8 @@ export default function ParentRewardsPage() {
         requests.map((r) => (
           <div key={r.id} className={`card ${styles.requestRow}`}>
             <div className={styles.requestInfo}>
-              <strong>
-                {r.reward.icon} {r.reward.name}
+              <strong className={styles.iconLabel}>
+                <Icon name={r.reward.icon} size={16} /> {r.reward.name}
               </strong>
               <span className="hint">
                 {r.user.name} ・ 必要 {r.reward.needReward}pt
@@ -81,10 +85,12 @@ export default function ParentRewardsPage() {
       <p className={styles.section}>ごほうびカタログ</p>
       {rewards.map((r) => (
         <div key={r.id} className={`card ${styles.rewardRow}`}>
-          <span>
-            {r.icon} {r.name}
+          <span className={styles.iconLabel}>
+            <Icon name={r.icon} size={16} /> {r.name}
           </span>
-          <span className="pointsChip">⭐ {r.needReward}pt</span>
+          <span className="pointsChip">
+            <Star size={14} aria-hidden="true" /> {r.needReward}pt
+          </span>
         </div>
       ))}
       <Link href="/parent/master" className="btn btnSecondary btnBlock">

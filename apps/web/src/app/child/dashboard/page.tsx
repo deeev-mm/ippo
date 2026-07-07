@@ -2,9 +2,11 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { BarChart3, Star } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { api, type TaskWithMeta } from "@/lib/api";
 import { StatusPill } from "@/components/StatusPill";
+import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
 export default function ChildDashboardPage() {
@@ -38,12 +40,16 @@ export default function ChildDashboardPage() {
   return (
     <>
       <div className={styles.hero}>
-        <span className="avatar avatarLg">{user?.avatar}</span>
+        <span className="avatar avatarLg">
+          <Icon name={user?.avatar} size={36} />
+        </span>
         <div>
           <h1 className="pageTitle" style={{ margin: 0 }}>
             {user?.name}さん
           </h1>
-          <span className="pointsChip">⭐ {balance}pt</span>
+          <span className="pointsChip">
+            <Star size={14} aria-hidden="true" /> {balance}pt
+          </span>
         </div>
       </div>
 
@@ -63,7 +69,7 @@ export default function ChildDashboardPage() {
           </div>
 
           <Link href="/child/report" className="btn btnSecondary btnBlock">
-            📊 レポートを見る
+            <BarChart3 size={16} aria-hidden="true" /> レポートを見る
           </Link>
           <div className="spacer" />
 

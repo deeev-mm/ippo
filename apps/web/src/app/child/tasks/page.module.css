@@ -40,9 +40,16 @@
 
 .taskMeta {
   display: flex;
+  align-items: center;
   gap: 10px;
   font-size: 0.8rem;
   color: var(--ink-muted);
+}
+
+.taskMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .taskActions {

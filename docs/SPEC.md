@@ -64,6 +64,8 @@ Badge（バッジマスタ：アイコン・付与条件JSON）
 
 全テーブルの主キーはUUID文字列（`crypto.randomUUID()`）。D1のオートインクリメントに依存しない。
 
+`users.avatar` / `badges.icon` / `rewards.icon` はテキストカラムだが、絵文字ではなく `lucide-react` のアイコン名（例: `"Rocket"`, `"Award"`, `"Cookie"`）を格納する。フロントの `src/lib/icons.ts` に選択候補（アバター用・バッジ用・ごほうび用）を定義し、`src/components/IconPicker.tsx` で選ばせ、`src/components/Icon.tsx` で名前からコンポーネントを解決して描画する（未知の名前は `HelpCircle` にフォールバック）。
+
 ## 4. 認証・セッション設計
 
 - ログイン: `POST /auth/login` に `{ name, password }`。成功時、ランダム32byteトークンを発行し `sessions.token_hash`（SHA-256）に保存、Cookieには生トークンをhttpOnlyで返す。
@@ -74,7 +76,7 @@ Badge（バッジマスタ：アイコン・付与条件JSON）
 
 ## 5. APIエンドポイント一覧
 
-ベースURL: ローカルでは `http://localhost:8787`（`NEXT_PUBLIC_API_BASE_URL` で指定）。
+ベースURL: ローカルでは `http://localhost:8790`（`NEXT_PUBLIC_API_BASE_URL` で指定）。
 
 | メソッド | パス | 認可 | 概要 |
 |---|---|---|---|
@@ -159,7 +161,16 @@ Badge（バッジマスタ：アイコン・付与条件JSON）
 
 `/parent/master` の「履歴」タブから3つの履歴画面へ、各ダッシュボードの「レポートを見る」からレポート画面へ遷移できる。
 
-## 9. デプロイ・CORS・環境変数
+## 9. PWA対応
+
+ホーム画面に追加してアプリのように使えるよう、Next.jsのファイル規約でPWA化している（追加の依存パッケージなし）。
+
+- `src/app/manifest.ts` → `/manifest.webmanifest` を自動生成（`display: standalone`, テーマカラー等）
+- `src/app/icon.tsx` / `apple-icon.tsx` / `icon-192.png/route.tsx` / `icon-512.png/route.tsx` → `next/og` の `ImageResponse` でブランドマーク（`src/components/BrandMark.tsx`）からfavicon・ホーム画面アイコンをオンデマンド生成。画像アセットを一切リポジトリに置かない
+- `public/sw.js` → 最小構成のService Worker。`/_next/static/`はキャッシュ優先、ページ遷移はネットワーク優先＋オフライン時のみキャッシュへフォールバック。`src/components/ServiceWorkerRegister.tsx` が起動時に登録
+- Chrome DevTools Protocol の `Page.getInstallabilityErrors` でインストール可能であることを確認済み（エラー0件）
+
+## 10. デプロイ・CORS・環境変数
 
 UI（Pages）とAPI（Workers）を分けるとブラウザで**CORSエラー**が出やすい。
 
@@ -177,12 +188,12 @@ UI（Pages）とAPI（Workers）を分けるとブラウザで**CORSエラー**�
 - ローカルと本番の Origin を許可リストに入れる
 - 本番デプロイ前に `apps/api/wrangler.toml` の `database_id`（プレースホルダ）を `wrangler d1 create ippo` で発行した実IDに差し替える
 
-## 10. ローカル起動
+## 11. ローカル起動
 
 ```bash
 pnpm install
 pnpm setup:local   # D1マイグレーション + デモアカウントseed
-pnpm dev           # api:8787 / web:3000
+pnpm dev           # api:8790 / web:3010
 ```
 
 デモアカウント: `parent` / `taro` / `hanako`（パスワードは全て `demo1234`）。

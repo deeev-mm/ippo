@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { Star } from "lucide-react";
 import type { Reward } from "@ippo/shared";
 import { api, type RewardRequestWithMeta } from "@/lib/api";
 import { StatusPill } from "@/components/StatusPill";
+import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
 export default function ChildRewardsPage() {
@@ -46,7 +48,7 @@ export default function ChildRewardsPage() {
       <h1 className="pageTitle">ごほうび</h1>
       <div className="card" style={{ textAlign: "center" }}>
         <span className="pointsChip" style={{ fontSize: "1.2rem" }}>
-          ⭐ {balance}pt
+          <Star size={18} aria-hidden="true" /> {balance}pt
         </span>
       </div>
 
@@ -56,7 +58,7 @@ export default function ChildRewardsPage() {
       {rewards.map((r) => (
         <div key={r.id} className={`card ${styles.rewardRow}`}>
           <div className={styles.rewardInfo}>
-            <span>{r.icon}</span>
+            <Icon name={r.icon} size={18} />
             <strong>{r.name}</strong>
           </div>
           <button className="btn btnSm" disabled={balance < r.needReward} onClick={() => request(r.id)}>
@@ -71,8 +73,8 @@ export default function ChildRewardsPage() {
       ) : (
         requests.map((r) => (
           <div key={r.id} className={`card ${styles.requestRow}`}>
-            <span>
-              {r.reward.icon} {r.reward.name}
+            <span className={styles.rewardInfo}>
+              <Icon name={r.reward.icon} size={16} /> {r.reward.name}
             </span>
             <StatusPill status={r.status} />
           </div>

@@ -38,6 +38,9 @@ importers:
       '@ippo/shared':
         specifier: workspace:^
         version: link:../../packages/shared
+      lucide-react:
+        specifier: ^0.475.0
+        version: 0.475.0(react@19.1.0)
       next:
         specifier: 15.5.22
         version: 15.5.22(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -2121,6 +2124,11 @@ packages:
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
+
+  lucide-react@0.475.0:
+    resolution: {integrity: sha512-NJzvVu1HwFVeZ+Gwq2q00KygM1aBhy/ZrhY9FsAgJtpB+E4R7uxRk9M2iKvHa6/vNxZydIB59htha4c2vvwvVg==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   magic-string@0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
@@ -4565,6 +4573,10 @@ snapshots:
   loose-envify@1.4.0:
     dependencies:
       js-tokens: 4.0.0
+
+  lucide-react@0.475.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
 
   magic-string@0.25.9:
     dependencies:

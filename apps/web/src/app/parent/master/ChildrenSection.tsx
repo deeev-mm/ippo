@@ -2,9 +2,12 @@
 
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { api, type Child } from "@/lib/api";
+import { AVATAR_ICONS, DEFAULT_AVATAR_ICON } from "@/lib/icons";
+import { Icon } from "@/components/Icon";
+import { IconPicker } from "@/components/IconPicker";
 import styles from "./master.module.css";
 
-const EMPTY = { name: "", password: "", icon: "🙂", colorTheme: "blue" };
+const EMPTY = { name: "", password: "", icon: DEFAULT_AVATAR_ICON as string, colorTheme: "blue" };
 
 export function ChildrenSection() {
   const [children, setChildren] = useState<Child[]>([]);
@@ -19,7 +22,12 @@ export function ChildrenSection() {
 
   function startEdit(child: Child) {
     setEditingId(child.id);
-    setForm({ name: child.name, password: "", icon: child.avatar ?? "🙂", colorTheme: child.theme ?? "blue" });
+    setForm({
+      name: child.name,
+      password: "",
+      icon: child.avatar ?? DEFAULT_AVATAR_ICON,
+      colorTheme: child.theme ?? "blue",
+    });
   }
 
   function resetForm() {
@@ -59,7 +67,9 @@ export function ChildrenSection() {
       {children.map((c) => (
         <div key={c.id} className={`card ${styles.row}`}>
           <div className={styles.rowInfo}>
-            <span className="avatar">{c.avatar}</span>
+            <span className="avatar">
+              <Icon name={c.avatar} size={20} />
+            </span>
             <span>{c.name}</span>
           </div>
           <div className={styles.rowActions}>
@@ -94,10 +104,6 @@ export function ChildrenSection() {
               />
             </div>
             <div className="field">
-              <label>アイコン（絵文字）</label>
-              <input value={form.icon} onChange={(e) => setForm({ ...form, icon: e.target.value })} />
-            </div>
-            <div className="field">
               <label>テーマカラー</label>
               <select value={form.colorTheme} onChange={(e) => setForm({ ...form, colorTheme: e.target.value })}>
                 <option value="blue">ブルー</option>
@@ -107,6 +113,14 @@ export function ChildrenSection() {
                 <option value="orange">オレンジ</option>
               </select>
             </div>
+          </div>
+          <div className="field">
+            <label>アイコン</label>
+            <IconPicker
+              options={AVATAR_ICONS}
+              value={form.icon}
+              onChange={(icon) => setForm({ ...form, icon })}
+            />
           </div>
           <div className={styles.formActions}>
             <button type="submit" className="btn btnSm">

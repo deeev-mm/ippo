@@ -2,21 +2,21 @@
 -- password for all demo accounts: demo1234
 
 INSERT INTO users (id, name, password_hash, avatar, theme, role, created_at, updated_at) VALUES
-  ('seed-user-parent', 'parent', 'pbkdf2$100000$AQIDBAUGBwgJCgsMDQ4PEA==$e/NCueltBBSvHBHLWewhYQcCd8+17U6p9jiqFYYFrJg=', '🧑', 'blue', 'parent', datetime('now'), datetime('now')),
-  ('seed-user-taro', 'taro', 'pbkdf2$100000$AQIDBAUGBwgJCgsMDQ4PEA==$e/NCueltBBSvHBHLWewhYQcCd8+17U6p9jiqFYYFrJg=', '👦', 'blue', 'child', datetime('now'), datetime('now')),
-  ('seed-user-hanako', 'hanako', 'pbkdf2$100000$AQIDBAUGBwgJCgsMDQ4PEA==$e/NCueltBBSvHBHLWewhYQcCd8+17U6p9jiqFYYFrJg=', '👧', 'pink', 'child', datetime('now'), datetime('now'));
+  ('seed-user-parent', 'parent', 'pbkdf2$100000$AQIDBAUGBwgJCgsMDQ4PEA==$e/NCueltBBSvHBHLWewhYQcCd8+17U6p9jiqFYYFrJg=', 'UserRound', 'blue', 'parent', datetime('now'), datetime('now')),
+  ('seed-user-taro', 'taro', 'pbkdf2$100000$AQIDBAUGBwgJCgsMDQ4PEA==$e/NCueltBBSvHBHLWewhYQcCd8+17U6p9jiqFYYFrJg=', 'Rocket', 'blue', 'child', datetime('now'), datetime('now')),
+  ('seed-user-hanako', 'hanako', 'pbkdf2$100000$AQIDBAUGBwgJCgsMDQ4PEA==$e/NCueltBBSvHBHLWewhYQcCd8+17U6p9jiqFYYFrJg=', 'Cat', 'pink', 'child', datetime('now'), datetime('now'));
 
 INSERT INTO task_categories (id, name, slug, created_at, updated_at) VALUES
   ('seed-cat-study', 'べんきょう', 'study', datetime('now'), datetime('now')),
   ('seed-cat-chores', 'おてつだい', 'chores', datetime('now'), datetime('now'));
 
 INSERT INTO rewards (id, name, icon, need_reward, created_at, updated_at) VALUES
-  ('seed-reward-snack', 'おかし', '🍪', 30, datetime('now'), datetime('now')),
-  ('seed-reward-game', 'ゲーム30分', '🎮', 100, datetime('now'), datetime('now'));
+  ('seed-reward-snack', 'おかし', 'Cookie', 30, datetime('now'), datetime('now')),
+  ('seed-reward-game', 'ゲーム30分', 'Gamepad2', 100, datetime('now'), datetime('now'));
 
 INSERT INTO badges (id, name, icon, condition, is_active, created_at, updated_at) VALUES
-  ('seed-badge-first', 'はじめての完了', '🏅', '{"task_approve":{"gte":1}}', 1, datetime('now'), datetime('now')),
-  ('seed-badge-five', 'がんばり5回', '⭐', '{"task_approve":{"gte":5}}', 1, datetime('now'), datetime('now'));
+  ('seed-badge-first', 'はじめての完了', 'Award', '{"task_approve":{"gte":1}}', 1, datetime('now'), datetime('now')),
+  ('seed-badge-five', 'がんばり5回', 'Star', '{"task_approve":{"gte":5}}', 1, datetime('now'), datetime('now'));
 
 INSERT INTO tasks (id, title, description, due_date, recurrence, parent_id, child_id, task_category_id, reward_amount, created_at, updated_at) VALUES
   ('seed-task-1', '宿題をする', '算数のプリントをやろう', date('now'), 'daily', 'seed-user-parent', 'seed-user-taro', 'seed-cat-study', 10, datetime('now'), datetime('now')),

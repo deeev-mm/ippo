@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { BarChart3, Plus, Star } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { api } from "@/lib/api";
 import styles from "./page.module.css";
@@ -48,7 +49,7 @@ export default function ParentDashboardPage() {
           </div>
 
           <Link href="/parent/report" className="btn btnSecondary btnBlock">
-            📊 レポートを見る
+            <BarChart3 size={16} aria-hidden="true" /> レポートを見る
           </Link>
           <div className="spacer" />
 
@@ -63,14 +64,16 @@ export default function ParentDashboardPage() {
                 <div className={styles.childInfo}>
                   <div className={styles.childName}>{b.name}</div>
                 </div>
-                <span className="pointsChip">⭐ {b.balance}pt</span>
+                <span className="pointsChip">
+                  <Star size={14} aria-hidden="true" /> {b.balance}pt
+                </span>
               </div>
             ))
           )}
 
           <div className="spacer" />
           <Link href="/parent/tasks/new" className="btn btnBlock">
-            ＋ タスクをつくる
+            <Plus size={16} aria-hidden="true" /> タスクをつくる
           </Link>
         </>
       )}

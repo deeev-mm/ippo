@@ -3,11 +3,14 @@
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import type { Badge, TaskCategory } from "@ippo/shared";
 import { api } from "@/lib/api";
+import { BADGE_ICONS, DEFAULT_BADGE_ICON } from "@/lib/icons";
+import { Icon } from "@/components/Icon";
+import { IconPicker } from "@/components/IconPicker";
 import styles from "./master.module.css";
 
 type Kind = "task_approve" | "badge_own_count";
 
-const EMPTY = { name: "", icon: "🏅", kind: "task_approve" as Kind, gte: 1, category: "" };
+const EMPTY = { name: "", icon: DEFAULT_BADGE_ICON as string, kind: "task_approve" as Kind, gte: 1, category: "" };
 
 function parseCondition(raw: string): typeof EMPTY {
   try {
@@ -105,7 +108,7 @@ export function BadgesSection() {
       {badges.map((b) => (
         <div key={b.id} className={`card ${styles.row}`}>
           <div className={styles.rowInfo}>
-            <span>{b.icon}</span>
+            <Icon name={b.icon} size={20} />
             <div>
               <div>
                 <strong>{b.name}</strong>
@@ -133,15 +136,17 @@ export function BadgesSection() {
         </h2>
         {error && <p className="error">{error}</p>}
         <form onSubmit={onSubmit}>
-          <div className={styles.formGrid}>
-            <div className="field">
-              <label>なまえ</label>
-              <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
-            </div>
-            <div className="field">
-              <label>アイコン（絵文字）</label>
-              <input value={form.icon} onChange={(e) => setForm({ ...form, icon: e.target.value })} required />
-            </div>
+          <div className="field">
+            <label>なまえ</label>
+            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
+          </div>
+          <div className="field">
+            <label>アイコン</label>
+            <IconPicker
+              options={BADGE_ICONS}
+              value={form.icon}
+              onChange={(icon) => setForm({ ...form, icon })}
+            />
           </div>
 
           <div className="field">

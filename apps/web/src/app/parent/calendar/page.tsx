@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { api, type TaskWithMeta } from "@/lib/api";
 import styles from "./page.module.css";
 
@@ -51,7 +52,7 @@ export default function ParentCalendarPage() {
           className="btn btnSecondary btnSm"
           onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}
         >
-          ← 前月
+          <ChevronLeft size={16} aria-hidden="true" /> 前月
         </button>
         <h1 className="pageTitle" style={{ margin: 0 }}>
           {cursor.getFullYear()}年{cursor.getMonth() + 1}月
@@ -60,7 +61,7 @@ export default function ParentCalendarPage() {
           className="btn btnSecondary btnSm"
           onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}
         >
-          次月 →
+          次月 <ChevronRight size={16} aria-hidden="true" />
         </button>
       </div>
 

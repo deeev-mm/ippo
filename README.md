@@ -30,6 +30,8 @@ Hono on Cloudflare Workers
 
 シングルテナント（1デプロイ = 1家族）。複数家族を1つのデプロイで管理するテナント概念は持ちません。
 
+アイコンは絵文字を使わず、すべて`lucide-react`のSVGアイコンで統一しています。ホーム画面へのインストール（PWA）にも対応済みです。
+
 ## アカウント・ロール
 
 | ロール | できること                                                       |
@@ -57,7 +59,7 @@ pnpm install
 # D1 マイグレーション + デモアカウントのシード
 pnpm setup:local
 
-# API (http://localhost:8787) と Web (http://localhost:3000) を同時起動
+# API (http://localhost:8790) と Web (http://localhost:3010) を同時起動
 pnpm dev
 ```
 

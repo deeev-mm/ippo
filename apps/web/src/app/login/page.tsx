@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { Footprints } from "lucide-react";
 import { api, ApiError } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import styles from "./page.module.css";
@@ -31,7 +32,9 @@ export default function LoginPage() {
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.logo}>👣</div>
+      <div className={styles.logo}>
+        <Footprints size={40} aria-hidden="true" />
+      </div>
       <p className={`brand ${styles.brand}`}>ippo</p>
       <p className={styles.tagline}>毎日、いっぽずつ。</p>
 

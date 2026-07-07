@@ -11,7 +11,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { Star } from "lucide-react";
 import { api, type ProgressReport } from "@/lib/api";
+import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
 function formatDay(ymd: string) {
@@ -55,7 +57,7 @@ export default function ParentReportPage() {
             className={`${styles.tab} ${selected === c.id ? styles.tabActive : ""}`}
             onClick={() => setSelected(c.id)}
           >
-            {c.avatar} {c.name}
+            <Icon name={c.avatar} size={14} /> {c.name}
           </button>
         ))}
       </div>
@@ -67,7 +69,9 @@ export default function ParentReportPage() {
             <div key={t.id} className={`card ${styles.summaryCard}`}>
               <div className={styles.summaryValue}>{t.completed}</div>
               <div className={styles.summaryLabel}>
-                {t.name} ・かんりょう（⭐{t.points}pt）
+                {t.name} ・かんりょう（
+                <Star size={12} aria-hidden="true" />
+                {t.points}pt）
               </div>
             </div>
           ))}
@@ -85,7 +89,7 @@ export default function ParentReportPage() {
         return (
           <div key={child.id} className={`card ${styles.chartCard}`}>
             <div className={styles.chartTitle}>
-              {child.avatar} {child.name}
+              <Icon name={child.avatar} size={18} /> {child.name}
             </div>
             <ResponsiveContainer width="100%" height={200}>
               <ComposedChart data={chartData}>

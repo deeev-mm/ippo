@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { CalendarDays, Star } from "lucide-react";
 import { api, type TaskWithMeta } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { StatusPill } from "@/components/StatusPill";
@@ -35,8 +36,14 @@ export default function ChildTaskDetailPage() {
       <h1 className="pageTitle">{task.title}</h1>
       <div className={styles.meta}>
         <StatusPill status={task.completionStatus} />
-        {task.dueDate && <span>📅 {task.dueDate}</span>}
-        <span className="pointsChip">⭐ {task.rewardAmount}pt</span>
+        {task.dueDate && (
+          <span>
+            <CalendarDays size={14} aria-hidden="true" /> {task.dueDate}
+          </span>
+        )}
+        <span className="pointsChip">
+          <Star size={14} aria-hidden="true" /> {task.rewardAmount}pt
+        </span>
       </div>
 
       <div className="card">

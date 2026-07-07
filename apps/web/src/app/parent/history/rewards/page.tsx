@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ChevronLeft, TrendingDown, TrendingUp } from "lucide-react";
 import { api, type RewardBalanceHistoryWithName } from "@/lib/api";
 import styles from "../history.module.css";
 
@@ -19,7 +20,9 @@ export default function RewardHistoryPage() {
   return (
     <>
       <p className={styles.crumbs}>
-        <Link href="/parent/master">← せっていにもどる</Link>
+        <Link href="/parent/master">
+          <ChevronLeft size={14} aria-hidden="true" /> せっていにもどる
+        </Link>
       </p>
       <h1 className="pageTitle">ポイント履歴</h1>
 
@@ -31,7 +34,13 @@ export default function RewardHistoryPage() {
         histories.map((h) => (
           <div key={h.id} className={`card ${styles.row}`}>
             <div className={styles.rowInfo}>
-              <span>{h.amount >= 0 ? "📈" : "📉"}</span>
+              <span>
+                {h.amount >= 0 ? (
+                  <TrendingUp size={18} color="var(--mint-deep)" aria-hidden="true" />
+                ) : (
+                  <TrendingDown size={18} color="var(--danger)" aria-hidden="true" />
+                )}
+              </span>
               <div>
                 <div>
                   <strong>{h.userName}</strong>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { api, type BadgeAssignmentWithBadge } from "@/lib/api";
+import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
 export default function ChildBadgesPage() {
@@ -33,7 +34,9 @@ export default function ChildBadgesPage() {
         assignments.map((a) => (
           <div key={a.id} className={`card ${styles.row} ${a.status === "pending" ? styles.locked : ""}`}>
             <div className={styles.info}>
-              <span className="avatar avatarLg">{a.badge.icon}</span>
+              <span className="avatar avatarLg">
+                <Icon name={a.badge.icon} size={30} />
+              </span>
               <div>
                 <div>
                   <strong>{a.badge.name}</strong>

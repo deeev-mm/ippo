@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { api, type Child, type TaskListResponse } from "@/lib/api";
 import { StatusPill } from "@/components/StatusPill";
 import styles from "../history.module.css";
@@ -38,7 +39,9 @@ export default function TaskHistoryPage() {
   return (
     <>
       <p className={styles.crumbs}>
-        <Link href="/parent/master">← せっていにもどる</Link>
+        <Link href="/parent/master">
+          <ChevronLeft size={14} aria-hidden="true" /> せっていにもどる
+        </Link>
       </p>
       <h1 className="pageTitle">タスク履歴</h1>
 
@@ -68,7 +71,11 @@ export default function TaskHistoryPage() {
               <div>
                 <strong>{task.title}</strong>
                 <div className={styles.rowMeta}>
-                  {childName(task.childId)} ・ ⭐{task.rewardAmount}pt ・{" "}
+                  {childName(task.childId)} ・{" "}
+                  <span className={styles.inlineIcon}>
+                    <Star size={12} aria-hidden="true" /> {task.rewardAmount}pt
+                  </span>{" "}
+                  ・{" "}
                   {task.latestSubmission &&
                     new Date(task.latestSubmission.submittedAt).toLocaleDateString("ja-JP")}
                 </div>
@@ -84,7 +91,7 @@ export default function TaskHistoryPage() {
                 disabled={page <= 1}
                 onClick={() => setPage((p) => p - 1)}
               >
-                ← 前へ
+                <ChevronLeft size={16} aria-hidden="true" /> 前へ
               </button>
               <span className="hint">
                 {page} / {result.lastPage}
@@ -94,7 +101,7 @@ export default function TaskHistoryPage() {
                 disabled={page >= result.lastPage}
                 onClick={() => setPage((p) => p + 1)}
               >
-                次へ →
+                次へ <ChevronRight size={16} aria-hidden="true" />
               </button>
             </div>
           )}

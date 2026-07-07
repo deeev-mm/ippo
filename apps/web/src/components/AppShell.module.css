@@ -25,6 +25,9 @@
 }
 
 .topbarName {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 0.85rem;
   color: var(--ink-muted);
 }
@@ -55,7 +58,7 @@
 }
 
 .navIcon {
-  font-size: 1.3rem;
+  flex-shrink: 0;
 }
 
 .navItemActive {

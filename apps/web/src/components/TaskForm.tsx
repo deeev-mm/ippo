@@ -100,7 +100,7 @@ export function TaskForm({
           <option value="">えらんでください</option>
           {children.map((c) => (
             <option key={c.id} value={c.id}>
-              {c.avatar} {c.name}
+              {c.name}
             </option>
           ))}
         </select>

@@ -1,11 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useState, type FormEvent } from "react";
+import { Star } from "lucide-react";
 import type { Reward } from "@ippo/shared";
 import { api } from "@/lib/api";
+import { DEFAULT_REWARD_ICON, REWARD_ICONS } from "@/lib/icons";
+import { Icon } from "@/components/Icon";
+import { IconPicker } from "@/components/IconPicker";
 import styles from "./master.module.css";
 
-const EMPTY = { name: "", icon: "🎁", need_reward: 10 };
+const EMPTY = { name: "", icon: DEFAULT_REWARD_ICON as string, need_reward: 10 };
 
 export function RewardsSection() {
   const [rewards, setRewards] = useState<Reward[]>([]);
@@ -55,9 +59,11 @@ export function RewardsSection() {
       {rewards.map((r) => (
         <div key={r.id} className={`card ${styles.row}`}>
           <div className={styles.rowInfo}>
-            <span>{r.icon}</span>
+            <Icon name={r.icon} size={20} />
             <strong>{r.name}</strong>
-            <span className="pointsChip">⭐ {r.needReward}pt</span>
+            <span className="pointsChip">
+              <Star size={14} aria-hidden="true" /> {r.needReward}pt
+            </span>
           </div>
           <div className={styles.rowActions}>
             <button className="btn btnSecondary btnSm" onClick={() => startEdit(r)}>
@@ -82,10 +88,6 @@ export function RewardsSection() {
               <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
             </div>
             <div className="field">
-              <label>アイコン（絵文字）</label>
-              <input value={form.icon} onChange={(e) => setForm({ ...form, icon: e.target.value })} required />
-            </div>
-            <div className="field">
               <label>必要ポイント</label>
               <input
                 type="number"
@@ -95,6 +97,14 @@ export function RewardsSection() {
                 required
               />
             </div>
+          </div>
+          <div className="field">
+            <label>アイコン</label>
+            <IconPicker
+              options={REWARD_ICONS}
+              value={form.icon}
+              onChange={(icon) => setForm({ ...form, icon })}
+            />
           </div>
           <div className={styles.formActions}>
             <button type="submit" className="btn btnSm">

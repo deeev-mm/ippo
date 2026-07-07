@@ -56,6 +56,22 @@
 }
 
 .crumbs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
   color: var(--ink-muted);
   font-size: 0.85rem;
+}
+
+.inlineIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.amountPositive,
+.amountNegative {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }

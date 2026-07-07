@@ -55,6 +55,12 @@
   color: var(--ink-muted);
 }
 
+.taskMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .taskActions {
   display: flex;
   gap: 8px;

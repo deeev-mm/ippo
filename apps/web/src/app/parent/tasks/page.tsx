@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { CalendarDays, ChevronLeft, ChevronRight, MessageCircle, Plus, Star } from "lucide-react";
 import { api, type Child, type TaskListResponse } from "@/lib/api";
 import { StatusPill } from "@/components/StatusPill";
+import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
 const TABS = [
@@ -68,14 +70,14 @@ export default function ParentTasksPage() {
   }
 
   const childName = (id: string | null) => children.find((c) => c.id === id)?.name ?? "-";
-  const childAvatar = (id: string | null) => children.find((c) => c.id === id)?.avatar ?? "❔";
+  const childAvatar = (id: string | null) => children.find((c) => c.id === id)?.avatar ?? null;
 
   return (
     <>
       <div className={styles.header}>
         <h1 className="pageTitle">タスク</h1>
         <Link href="/parent/tasks/new" className="btn btnSm">
-          ＋ つくる
+          <Plus size={16} aria-hidden="true" /> つくる
         </Link>
       </div>
 
@@ -106,11 +108,21 @@ export default function ParentTasksPage() {
                 </div>
                 <div className={styles.taskMeta}>
                   <span>
-                    {childAvatar(task.childId)} {childName(task.childId)}
+                    <Icon name={childAvatar(task.childId)} size={14} /> {childName(task.childId)}
                   </span>
-                  {task.dueDate && <span>📅 {task.dueDate}</span>}
-                  <span>⭐ {task.rewardAmount}pt</span>
-                  {task.commentsCount > 0 && <span>💬 {task.commentsCount}</span>}
+                  {task.dueDate && (
+                    <span>
+                      <CalendarDays size={14} aria-hidden="true" /> {task.dueDate}
+                    </span>
+                  )}
+                  <span>
+                    <Star size={14} aria-hidden="true" /> {task.rewardAmount}pt
+                  </span>
+                  {task.commentsCount > 0 && (
+                    <span>
+                      <MessageCircle size={14} aria-hidden="true" /> {task.commentsCount}
+                    </span>
+                  )}
                 </div>
               </Link>
               <div className={styles.taskActions}>
@@ -141,7 +153,7 @@ export default function ParentTasksPage() {
                 disabled={page <= 1}
                 onClick={() => setPage(page - 1)}
               >
-                ← 前へ
+                <ChevronLeft size={16} aria-hidden="true" /> 前へ
               </button>
               <span>
                 {page} / {result.lastPage}
@@ -151,7 +163,7 @@ export default function ParentTasksPage() {
                 disabled={page >= result.lastPage}
                 onClick={() => setPage(page + 1)}
               >
-                次へ →
+                次へ <ChevronRight size={16} aria-hidden="true" />
               </button>
             </div>
           )}

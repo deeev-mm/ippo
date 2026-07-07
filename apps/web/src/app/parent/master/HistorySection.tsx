@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { ClipboardList, Star, Award } from "lucide-react";
 import styles from "./master.module.css";
 
 const LINKS = [
-  { href: "/parent/history/tasks", icon: "📋", label: "タスク履歴" },
-  { href: "/parent/history/rewards", icon: "⭐", label: "ポイント履歴" },
-  { href: "/parent/history/badges", icon: "🏅", label: "バッジ履歴" },
+  { href: "/parent/history/tasks", Icon: ClipboardList, label: "タスク履歴" },
+  { href: "/parent/history/rewards", Icon: Star, label: "ポイント履歴" },
+  { href: "/parent/history/badges", Icon: Award, label: "バッジ履歴" },
 ];
 
 export function HistorySection() {
@@ -13,7 +14,7 @@ export function HistorySection() {
       {LINKS.map((l) => (
         <Link key={l.href} href={l.href} className={`card ${styles.row}`}>
           <div className={styles.rowInfo}>
-            <span>{l.icon}</span>
+            <l.Icon size={20} aria-hidden="true" />
             <strong>{l.label}</strong>
           </div>
         </Link>

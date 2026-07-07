@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { CalendarDays, ChevronLeft, ChevronRight, MessageCircle, Star } from "lucide-react";
 import { api, type TaskListResponse } from "@/lib/api";
 import { StatusPill } from "@/components/StatusPill";
 import styles from "./page.module.css";
@@ -83,9 +84,19 @@ export default function ChildTasksPage() {
                   <StatusPill status={task.completionStatus} />
                 </div>
                 <div className={styles.taskMeta}>
-                  {task.dueDate && <span>📅 {task.dueDate}</span>}
-                  <span>⭐ {task.rewardAmount}pt</span>
-                  {task.commentsCount > 0 && <span>💬 {task.commentsCount}</span>}
+                  {task.dueDate && (
+                    <span>
+                      <CalendarDays size={14} aria-hidden="true" /> {task.dueDate}
+                    </span>
+                  )}
+                  <span>
+                    <Star size={14} aria-hidden="true" /> {task.rewardAmount}pt
+                  </span>
+                  {task.commentsCount > 0 && (
+                    <span>
+                      <MessageCircle size={14} aria-hidden="true" /> {task.commentsCount}
+                    </span>
+                  )}
                 </div>
               </Link>
               {task.completionStatus !== "submitted" && task.completionStatus !== "approved" && (
@@ -105,7 +116,7 @@ export default function ChildTasksPage() {
                 disabled={page <= 1}
                 onClick={() => setPage(page - 1)}
               >
-                ← 前へ
+                <ChevronLeft size={16} aria-hidden="true" /> 前へ
               </button>
               <span>
                 {page} / {result.lastPage}
@@ -115,7 +126,7 @@ export default function ChildTasksPage() {
                 disabled={page >= result.lastPage}
                 onClick={() => setPage(page + 1)}
               >
-                次へ →
+                次へ <ChevronRight size={16} aria-hidden="true" />
               </button>
             </div>
           )}
